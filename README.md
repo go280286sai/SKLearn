@@ -301,3 +301,291 @@ L1 (Lasso) и L2 (Ridge) регуляризацию. ElasticNet представ
     def getPredict(self):
         result = self.model.predict([self.args])
         print(result)
+
+# Модели кластеризации
+
+    ./Clustering
+
+## AffinityPropagation
+AffinityPropagation создает кластеры, отправляя сообщения между парами выборок до сходимости
+
+    Affinity = AffinityPropagationClass()
+    # Применить настройки
+    Affinity.setData()
+    # Приминить модель
+    Affinity.getData()
+    # Получить центры кластеров
+    # Affinity.getCenter()
+    # Получить дополнительную информацию
+    # Affinity.getInfo()
+    # Вывести данные из БД
+    # Affinity.getDb()
+    # Установить данные для прогноза
+    # Affinity.setPredict()
+    # Получить прогноз
+    # Affinity.getPredict()
+    # Сохранить результаты в файл
+    # Affinity.getSaveAll()
+    print("------------------------------------------")
+
+## AgglomerativeClustering
+Является одним из методов без учителя, используемых
+в машинном обучении для группировки данных. Он относится к семейству
+иерархической кластеризации, где объекты объединяются в иерархическую
+структуру кластеров.
+
+    Agglomerative = AgglomerativeClusteringClass()
+    # Применить настройки
+    Agglomerative.setData()
+    # Получить центры кластеров
+    Agglomerative.getData()
+    # Вывести данные из БД
+    # Agglomerative.getDb()
+    # Сохранить результаты в файл
+    # Agglomerative.getSaveAll()
+    print("------------------------------------------")
+
+# DBSCAN
+DBSCAN это алгоритм кластеризации, который используется
+для выявления групп объектов в пространстве на основе их плотности.
+Плотность определяется как количество объектов в заданном радиусе вокруг
+данного объекта.
+
+    DBSCAN = DBSCANClass()
+    # Применить настройки
+    DBSCAN.setData()
+    # Получить центры кластеров
+    DBSCAN.getData()
+    # Вывести данные из БД
+    # DBSCAN.getDb()
+    # Сохранить результаты в файл
+    # DBSCAN.getSaveAll()
+    print("------------------------------------------")
+
+## KMean
+Делит на заданное количество групп.
+
+    KMean = KMeanClass()
+    # Применить настройки
+    KMean.setData()
+    # Получить центры кластеров
+    KMean.getData()
+    # Вывести данные из БД
+    # KMean.getDb()
+    # Установить данные для прогноза
+    # KMean.setPredict()
+    # Получить прогноз
+    # KMean.getPredict()
+    # Сохранить результаты в файл
+    # KMean.getSaveAll()
+    print("------------------------------------------")
+
+## MeanShift
+MeanShift Его основная задача состоит в определении плотных областей
+данных в многомерном пространстве.
+
+    MeanShift = MeanShiftClass()
+    # Применить настройки
+    MeanShift.setData()
+    # Получить центры кластеров
+    MeanShift.getData()
+    # Вывести данные из БД
+    # MeanShift.getDb()
+    # Установить данные для прогноза
+    # MeanShift.setPredict()
+    # Получить прогноз
+    # MeanShift.getPredict()
+    # Сохранить результаты в файл
+    # MeanShift.getSaveAll()
+    print("------------------------------------------")
+
+## SpectralClustering
+SpectralClustering Он основан на спектральном анализе матрицы сходства между объектами данных.
+
+    SpectralClustering = SpectralClusteringClass()
+    # Применить настройки
+    SpectralClustering.setData()
+    # Получить центры кластеров
+    SpectralClustering.getData()
+    # Вывести данные из БД
+    # SpectralClustering.getDb()
+    # Установить данные для прогноза
+    # SpectralClustering.setPredict()
+    # Получить прогноз
+    # SpectralClustering.getPredict()
+    # Сохранить результаты в файл
+    # SpectralClustering.getSaveAll()
+    print("------------------------------------------")
+
+    def getData(self):
+### Определение модели
+        self.model = AffinityPropagation(random_state=3)
+### Указываем значения
+        self.model.fit(self.X)
+### Заносим метки с группами
+        self.df['index'] = labels = self.model.labels_
+### Определяем цетры групп
+        self.centroids = self.model.cluster_centers_indices_
+### Определяем и выводим количество кластеров
+        n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+        n_noise_ = list(labels).count(-1)
+        print("Приблизительное количество кластеров: %d" % n_clusters_)
+        print("Приблизительное количество точек шума: %d" % n_noise_)
+### Выводим результаты таблицы
+    def getDb(self):
+        print("Структура БД:")
+        print(self.df)
+### Выводим результаты таблицы центров кластеров
+    def getCenter(self):
+        self.centres = self.df.loc[self.centroids]
+        print(self.centres)
+### Выводим результаты прогнозирования
+    def getPredict(self):
+        self.predict['index'] = self.model.predict(self.predict.iloc[:].values)
+        print(self.predict)
+        self.set_predict = self.df[self.df['index'] == self.predict['index'].values[0]]
+        print(self.set_predict)
+### Сохраняем полученные результаты в файл
+    def getSaveAll(self):
+        try:
+            self.df.to_csv("./files/AffinityPropagation.csv", "@")
+            self.centres.to_csv("./files/AffinityPropagationCenter.csv", "@")
+            self.set_predict.to_csv("./files/AffinityPropagationPredict.csv", "@")
+        except Exception:
+            print("Не все файлы были сохранены. Пересмотрите их выполнение.", Exception)
+
+# Модели классификации
+
+    ./Classification.py
+
+## DecisionTreeClassifier
+Модель DecisionTreeRegressor из модуля sklearn.tree используется для
+задач регрессии, то есть для прогнозирования непрерывных числовых
+значений на основе входных признаков. Она строит дерево решений,
+которое разбивает пространство признаков на несколько регионов и в
+каждом регионе предсказывает числовое значение целевой переменной.
+Decision = DecisionTreeClassifierClass()
+
+    # Применить настройки
+    Decision.setData()
+    # Установить данные для прогноза
+    Decision.setPredict()
+    # Приминить модель
+    Decision.getData()
+    # Получить дополнительную информацию
+    # Decision.getInfo()
+    # Вывести данные из БД
+    # Decision.getDb()
+    # Получить прогноз
+    # Decision.getPredict()
+    print("------------------------------------------")
+
+## GradientBoostingClassifier
+Модель DecisionTreeRegressor из модуля sklearn.tree используется для
+задач регрессии, то есть для прогнозирования непрерывных числовых
+значений на основе входных признаков. Она строит дерево решений,
+которое разбивает пространство признаков на несколько регионов и в
+каждом регионе предсказывает числовое значение целевой переменной.
+
+    Gradient = GradientBoostingClassifierClass()
+    # Применить настройки
+    Gradient.setData()
+    # Установить данные для прогноза
+    Gradient.setPredict()
+    # Приминить модель
+    Gradient.getData()
+    # Получить дополнительную информацию
+    # Gradient.getInfo()
+    # Вывести данные из БД
+    # Gradient.getDb()
+    # Получить прогноз
+    # Gradient.getPredict()
+    print("------------------------------------------")
+
+## KNeighborsClassifier
+Когда требуется предсказывать непрерывное значение
+целевой переменной на основе ближайших соседей.
+
+    KNeighbors = KNeighborsClassifierClass()
+    # Применить настройки
+    KNeighbors.setData()
+    # Установить данные для прогноза
+    KNeighbors.setPredict()
+    # Приминить модель
+    KNeighbors.getData()
+    # Получить дополнительную информацию
+    # KNeighbors.getInfo()
+    # Вывести данные из БД
+    # KNeighbors.getDb()
+    # Получить прогноз
+    # KNeighbors.getPredict()
+    print("------------------------------------------")
+
+## RandomForestClassifier
+Используется в случаях, когда требуется построить регрессионную
+модель на основе ансамбля случайных лесов.
+
+    RandomForest = RandomForestClassifierClass()
+    # Применить настройки
+    RandomForest.setData()
+    # Установить данные для прогноза
+    RandomForest.setPredict()
+    # Приминить модель
+    RandomForest.getData()
+    # Получить дополнительную информацию
+    # RandomForest.getInfo()
+    # Вывести данные из БД
+    # RandomForest.getDb()
+    # Получить прогноз
+    # RandomForest.getPredict()
+    print("------------------------------------------")
+
+## LogisticRegression
+LogisticRegression является моделью логистической регрессии, которая
+используется для решения задач бинарной классификации или многоклассовой
+классификации. Она предсказывает вероятности принадлежности к определенным
+классам на основе линейной комбинации входных признаков.
+
+    Logistic = LogisticRegressionClass()
+    # Применить настройки
+    Logistic.setData()
+    # Установить данные для прогноза
+    Logistic.setPredict()
+    # Приминить модель
+    Logistic.getData()
+    # Получить дополнительную информацию
+    # Logistic.getInfo()
+    # Вывести данные из БД
+    # Logistic.getDb()
+    # Получить прогноз
+    # Logistic.getPredict()
+    print("------------------------------------------")
+## Где:
+ def getData(self):
+### Определение модели
+        self.model = DecisionTreeClassifier(random_state=0)
+### Указываем значения и и заносим значения прогноза
+        self.model.fit(self.X_train, self.y_train)
+        self.db = pd.DataFrame(self.X_test, columns=self.title)
+        self.db['Analise'] = self.y_test
+        self.db['Predict'] = self.model.predict(self.X_test)
+
+      ### Коэффициент score от 0 до 1. Где значение 1 означает идеальное соответствие данных, а значение 0 указывает на то, что модель не объясняет никакой вариации
+        score = self.model.score(self.X_test, self.y_test)
+        print("R^2 score:", score)
+### Измеряем среднюю разницу между прогнозируемыми значениями и фактическими значениями
+        MAE = mean_absolute_error(self.db['Predict'], self.y_test)
+        print("MAE:", MAE)
+### Измеряем среднее значение суммы квадратов каждой разницы между оценочным значением и истинным значением
+        MSE = mean_squared_error(self.db['Predict'], self.y_test)
+        print("MSE:", MSE**0.5)
+### Сравниваем фактических резкльтатов с прогнозируемыми
+        print(pd.crosstab(self.db['Analise'], self.db['Predict']))
+### Выводим таблицу
+    def getDb(self):
+        print("Структура БД:")
+        print(self.db)
+### Выводим прогнозируемое значение
+    def getPredict(self):
+        result = self.model.predict([self.args])
+        print(result)
