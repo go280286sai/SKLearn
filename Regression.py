@@ -57,7 +57,7 @@ Gradient.getData()
 Gradient.getPredict()
 print("------------------------------------------")
 
-print("GradientBoostingRegressor")
+print("KNeighborsRegressor")
 KNeighbors = KNeighborsRegressorClass()
 # Применить настройки
 KNeighbors.setData()
@@ -70,7 +70,7 @@ KNeighbors.getData()
 # Вывести данные из БД
 # KNeighbors.getDb()
 # Получить прогноз
-Gradient.getPredict()
+KNeighbors.getPredict()
 print("------------------------------------------")
 
 print("Lasso")

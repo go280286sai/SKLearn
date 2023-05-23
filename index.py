@@ -7,7 +7,7 @@ from sklearn.ensemble import ExtraTreesClassifier
 class Index:
     def setData(self):
         self.data = pd.read_csv('./files/students.csv')
-        self.data = self.data[['Growth', 'Shoe size', 'Sex', 'Weight']]
+
         # Перевод в цифровые метки
         self.coder = preprocessing.LabelEncoder()
         self.coder.fit(self.data['Sex'])
